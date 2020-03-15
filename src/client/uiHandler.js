@@ -13,7 +13,8 @@ export default (socketClient) =>{
     sendState.addEventListener('click', ()=>{ 
         if( stateText.value.length >0 && userName.value.length >0)
         {const data ={msg: stateText.value, user:userName.value}
-        data.time = Date.now();
+
+        data.time = Date(Date.now());
         socketClient.emit(EVENTS.SEND_STATE, data);
         stateText.value= '';
         }   
@@ -24,6 +25,7 @@ export default (socketClient) =>{
     });
 
     const sendLike = (msg, id) =>{ 
+        document.getElementById('buttonLike').disabled= true;
         const like = {msg:msg , id: id}
         socketClient.emit(EVENTS.REFRESH_LIKES, like)
 
