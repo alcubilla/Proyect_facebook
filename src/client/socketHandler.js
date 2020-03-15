@@ -6,14 +6,11 @@ export default (socketClient,ui) =>{
         ui.states.innerHTML =''
         allStates.forEach(state =>{
             ui.states.innerHTML += `<div>
-            <p>${state.text}</p>
-            <button onClick="window.ui.sendLike('${state.text}, ${state.id}, ${state.likes}')">Like</button>
-            <li>${state.likes}</li>
+            <p>${state.msg}-${state.time}-${state.user}-${state.likes}</p>
+            <button id="botonLike" onClick="window.ui.sendLike('${state.msg}','${state.id}')">Like</button>
+            <button onClick="window.ui.deleteLike('${state.msg}')">Delete</button>
             </div>`
         })
-
-        
-        
     })
 
 

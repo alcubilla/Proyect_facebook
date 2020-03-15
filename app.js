@@ -22,4 +22,4 @@ APP.get('/',(req,res)=>{
     res.render('home');
 });
 
-SERVER.listen(8000);
+SERVER.listen(7000);
