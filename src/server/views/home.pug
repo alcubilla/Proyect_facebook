@@ -5,12 +5,12 @@ html
         link(href="https://fonts.googleapis.com/css?family=Pontano+Sans&display=swap" rel="stylesheet")
     body
         .container
-            div.p-3.mb-2.bg-primary.text-white
-                .h1 Facebook 
-            div#new-state
+            div.rounded.bg-primary.text-white(style={width:'50%'}) 
+                .h1.text-center Facebook
+            div#new-state(style={padding: '10px', width:'50%'})
                 input#user-name.form-control.is-invalid(placeholder="usuario")
                 button#send-username.btn.btn-primary Actualizar Usuario
-            div.mb-3.p-3
+            div(style={padding: '10px', width:'50%'})
                 textarea#state-text.form-control.is-invalid(placeholder="Qué estás pensando")
                 button#send-state.btn.btn-primary Actualizar Estado
             div#states
