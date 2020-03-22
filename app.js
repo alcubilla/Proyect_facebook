@@ -2,11 +2,7 @@ import http from 'http';
 import express from 'express';
 import socketio from 'socket.io'
 import socketHandler from './src/server/socketHandler'
-//import bearerToken from 'express-bearer-token'
-//import { matchHash, createToken } from './hasher';
-//import authorize from './middlewares/authorize'
 
-const allStates=[];
 const APP=express();
 
 const SERVER =http.createServer(APP);
@@ -19,7 +15,7 @@ APP.set('view engine', 'pug');
 const io= socketio(SERVER);
 
 io.set('transports', ['websocket','polling']); //le da prioridad por websocket para la comunicacion,si no se puede...por polling
-io.on('connection',socketHandler(io,allStates)); //mientras tengamos coneccion haz esto , le pasamos la instancia io que creamos
+io.on('connection',socketHandler(io)); //mientras tengamos coneccion haz esto , le pasamos la instancia io que creamos
 
 APP.get('/',(req,res)=>{
     res.render('home');

@@ -13,6 +13,9 @@ export default (socketClient) =>{
     const usuario = document.getElementById('userName');
     const password = document.getElementById('password');
     const doLogin = document.getElementById('do-login');
+    const error =document.getElementById('error');
+    error.style.display='none';
+    const popular = document.getElementById('popular');
 
     const clientData ={
         token:''
@@ -22,43 +25,37 @@ export default (socketClient) =>{
         clientData.token = token;
     }
     
-   
-
     sendState.addEventListener('click', ()=>{ 
         if( stateText.value.length >0 && userName.value.length >0)
         {const data ={msg: stateText.value, user:userName.value}
-        data.time = Date(Date.now());
         data.token= clientData.token;
         socketClient.emit(EVENTS.SEND_STATE, data);
-        stateText.value= '';
+        stateText.value= ''
         }   
     });
 
     doLogin.addEventListener('click', ()=>{ 
         if( usuario.value.length >0 && password.value.length >0)
         {
-       socketClient.emit('doLogin', {
-           userName: usuario.value,
-           password: password.value
-       })
+        socketClient.emit('doLogin', {userName: usuario.value, password: password.value})
         }   
     });
 
     sendUser.addEventListener('click', ()=>{ 
-        if(userName.value.length > 0 ) socketClient.emit(EVENTS.SEND_NAME, userName.value)
+        if(userName.value.length > 0 ) socketClient.emit(EVENTS.SEND_NAME, {old:usuario.value, token:clientData.token, new: userName.value})
     });
 
-    const sendLike = (msg, id) =>{ 
-        document.getElementById('buttonLike').disabled= true;
-        const like = {msg:msg , id: id}
-        socketClient.emit(EVENTS.REFRESH_LIKES, like)
-
+    const sendLike = (msg) =>{ 
+        const data= {msg: msg, token: clientData.token}
+        socketClient.emit(EVENTS.REFRESH_LIKES, data)
     }
+        //document.getElementById(`${msg}`).disabled= true;
+    
 
     const deleteLike = (msg) =>{
-        socketClient.emit(EVENTS.DELETE_STATE, msg)
+        const data= {msg: msg, token: clientData.token}
+        socketClient.emit(EVENTS.DELETE_STATE, data)
     }
 
-    return{states, deleteLike, sendLike, wall, login, clientData, updateClientData}
-
+    return{states, deleteLike, sendLike, wall, login, clientData, updateClientData, error, popular, userName}
 }

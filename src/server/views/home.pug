@@ -8,11 +8,13 @@ html
             div.rounded.bg-primary.text-white(style={width:'50%'}) 
                 .h1.text-center Facebook
             div#login
-                label(for="userName") UserName
-                input#userName(placeholder="Ingresa Usuario")
-                label(for="password") Password
-                input#password(type="password",placeholder="Ingresa Password")
-                button#do-login Login
+                div#new-state(style={padding: '10px', width:'50%'})
+                    label(for="userName") UserName
+                    input#userName.form-control.is-invalid(placeholder="Ingresa Usuario")
+                div(style={padding: '10px', width:'50%'})
+                    label(for="password") Password
+                    input#password.form-control.is-invalid(type="password",placeholder="Ingresa Password")
+                    button#do-login.btn.btn-primary Login
             div#wall
                 div#new-state(style={padding: '10px', width:'50%'})
                     input#user-name.form-control.is-invalid(placeholder="usuario")
@@ -21,5 +23,7 @@ html
                     textarea#state-text.form-control.is-invalid(placeholder="Qué estás pensando")
                     button#send-state.btn.btn-primary Actualizar Estado
                 div#states
+            div#popular
+            div#error.form-popup
             script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js")
             script(src="./js/main.js")
