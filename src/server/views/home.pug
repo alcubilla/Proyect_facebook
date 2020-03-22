@@ -7,12 +7,19 @@ html
         .container
             div.rounded.bg-primary.text-white(style={width:'50%'}) 
                 .h1.text-center Facebook
-            div#new-state(style={padding: '10px', width:'50%'})
-                input#user-name.form-control.is-invalid(placeholder="usuario")
-                button#send-username.btn.btn-primary Actualizar Usuario
-            div(style={padding: '10px', width:'50%'})
-                textarea#state-text.form-control.is-invalid(placeholder="Qué estás pensando")
-                button#send-state.btn.btn-primary Actualizar Estado
-            div#states
+            div#login
+                label(for="userName") UserName
+                input#userName(placeholder="Ingresa Usuario")
+                label(for="password") Password
+                input#password(type="password",placeholder="Ingresa Password")
+                button#do-login Login
+            div#wall
+                div#new-state(style={padding: '10px', width:'50%'})
+                    input#user-name.form-control.is-invalid(placeholder="usuario")
+                    button#send-username.btn.btn-primary Actualizar Usuario
+                div(style={padding: '10px', width:'50%'})
+                    textarea#state-text.form-control.is-invalid(placeholder="Qué estás pensando")
+                    button#send-state.btn.btn-primary Actualizar Estado
+                div#states
             script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js")
             script(src="./js/main.js")

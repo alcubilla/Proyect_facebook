@@ -2,6 +2,9 @@ import http from 'http';
 import express from 'express';
 import socketio from 'socket.io'
 import socketHandler from './src/server/socketHandler'
+//import bearerToken from 'express-bearer-token'
+//import { matchHash, createToken } from './hasher';
+//import authorize from './middlewares/authorize'
 
 const allStates=[];
 const APP=express();

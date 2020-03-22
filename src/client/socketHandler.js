@@ -1,8 +1,16 @@
 import {EVENTS} from '../../constants';
 
 export default (socketClient,ui) =>{
+
+    socketClient.on('sucessLogin', (token)=>{
+        console.log('token')
+        ui.updateClientData(token);
+        ui.login.style.display='none';
+        ui.wall.style.display='block';
+    })
     
     socketClient.on(EVENTS.BRODCAST_STATE, (allStates) =>{
+        console.log(allStates)
         ui.states.innerHTML =''
         allStates.forEach(state =>{
             ui.states.innerHTML += `

@@ -7,16 +7,40 @@ export default (socketClient) =>{
     const states= document.getElementById('states'); 
     const userName =document.getElementById('user-name');
     const sendUser= document.getElementById('send-username');
+    const login = document.getElementById('login');
+    const wall=document.getElementById('wall');
+    wall.style.display = 'none';
+    const usuario = document.getElementById('userName');
+    const password = document.getElementById('password');
+    const doLogin = document.getElementById('do-login');
+
+    const clientData ={
+        token:''
+    }
+
+    function updateClientData (token){
+        clientData.token = token;
+    }
     
    
 
     sendState.addEventListener('click', ()=>{ 
         if( stateText.value.length >0 && userName.value.length >0)
         {const data ={msg: stateText.value, user:userName.value}
-
         data.time = Date(Date.now());
+        data.token= clientData.token;
         socketClient.emit(EVENTS.SEND_STATE, data);
         stateText.value= '';
+        }   
+    });
+
+    doLogin.addEventListener('click', ()=>{ 
+        if( usuario.value.length >0 && password.value.length >0)
+        {
+       socketClient.emit('doLogin', {
+           userName: usuario.value,
+           password: password.value
+       })
         }   
     });
 
@@ -35,6 +59,6 @@ export default (socketClient) =>{
         socketClient.emit(EVENTS.DELETE_STATE, msg)
     }
 
-    return{states, deleteLike, sendLike}
+    return{states, deleteLike, sendLike, wall, login, clientData, updateClientData}
 
 }
